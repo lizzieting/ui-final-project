@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Question {{ current_question }} - Yoga Quiz{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="progress mb-4">
+            <div class="progress-bar" 
+                 id="quiz-progress"
+                 role="progressbar" 
+                 aria-valuenow="{{ current_question }}" 
+                 aria-valuemin="0" 
+                 aria-valuemax="{{ total_questions }}">
+                Question {{ current_question }} of {{ total_questions }}
+            </div>
+        </div>
+
+        <h2 class="card-title mb-4">{{ question.question }}</h2>
+        <form action="{{ url_for('quiz', question_id=current_question) }}" method="POST" id="quizForm">
+            {% if question.get('type') == 'image' %}
+                <div class="row justify-content-center">
+                    {% for option in question.options %}
+                    <div class="col-md-4 mb-3">
+                        <label class="image-option">
+                            <input type="radio" name="answer" value="{{ option.text }}" required class="d-none">
+                            <img src="{{ option.image }}" alt="{{ option.text }}" class="img-fluid">
+                            <div class="mt-2 text-center">{{ option.text }}</div>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="list-group">
+                    {% for option in question.options %}
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="answer" value="{{ option }}" required>
+                        {{ option }}
+                    </label>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary mt-3">
+                {% if current_question == total_questions %}
+                    Finish Quiz
+                {% else %}
+                    Next Question
+                {% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="feedbackModalLabel">Result</h5>
+      </div>
+      <div class="modal-body" id="feedbackMessage"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="nextButton">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .image-option {
+        cursor: pointer;
+        transition: transform 0.2s;
+        text-align: center;
+    }
+    .image-option:hover {
+        transform: scale(1.05);
+    }
+    .image-option.selected {
+        border: 3px solid #0d6efd;
+        border-radius: 8px;
+    }
+    .image-option img {
+        max-width: 100%;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    .progress {
+        height: 25px;
+    }
+    .progress-bar {
+        background-color: #4CAF50;
+        transition: width 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBar = document.getElementById('quiz-progress');
+    const currentQuestion = parseInt(progressBar.getAttribute('aria-valuenow'));
+    const totalQuestions = parseInt(progressBar.getAttribute('aria-valuemax'));
+    progressBar.style.width = (currentQuestion / totalQuestions * 100) + '%';
+
+    document.querySelectorAll('.image-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.image-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            this.querySelector('input[type="radio"]').checked = true;
+        });
+    });
+
+    const form = document.getElementById('quizForm');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            feedbackMessage.textContent = data.correct ? "✅ Correct!" : "❌ Incorrect!";
+            const feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
+            feedbackModal.show();
+
+            document.getElementById('nextButton').onclick = function () {
+                window.location.href = data.next_url;
+            };
+        });
+    });
+});
+</script>
+{% endblock %}

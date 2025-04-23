@@ -1,0 +1,70 @@
+{
+  "flows": [
+    {
+      "id": "1", 
+      "title": "Breathe & Meditate",
+      "image": "https://i.pinimg.com/474x/2f/f4/ce/2ff4ceeef4f68886bf8ce62eaad8bda9.jpg",
+      "poses": [
+        {
+          "name": "Standing Side Stretch",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/vv7a9gdonpr46ocl7vk4.gif?w=600",
+          "instructions": "1. Stand tall and raise both arms overhead.\n2. Clasp hands and gently lean to one side.\n3. Breathe deeply and switch sides."
+        },
+        {
+          "name": "Tree Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gijnkznlgwzt0bcb1bgp.gif?w=600", 
+          "instructions": "1. Balance on one leg and place the other on your inner thigh.\n2. Bring hands to heart center or raise overhead.\n3. Focus on a point and breathe steadily."
+        },
+        {
+          "name": "Bound Angle Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gmgcbkyssvaetasg6ux3.gif?w=600", 
+          "instructions": "1. Sit with feet together and knees out to the sides.\n2. Hold your feet or ankles with your hands.\n3. Gently press knees down and breathe."
+        }
+      ]
+    },
+    {
+      "id": "2", 
+      "title": "Gentle Flow",
+      "image": "https://i.pinimg.com/736x/f4/32/7d/f4327d227261df4ba51ce85deb215011.jpg",
+      "poses": [
+        {
+          "name": "Seated Forward Bend",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/wqwoywcreesk3jvgeizf.gif?w=600",
+          "instructions": "1. Sit with legs extended in front of you.\n2. Inhale, then exhale and fold forward from the hips.\n3. Reach for your feet and relax your neck."
+        },
+        {
+          "name": "Cat-Cow Stretch",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/jwmpi0rqipzgycnv7aqf.gif?w=600",
+          "instructions": "1. Start on all fours with wrists under shoulders.\n2. Inhale to arch your back (cow), lifting your head.\n3. Exhale to round your spine (cat), tucking chin."
+        },
+        {
+          "name": "Triangle Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/j6ulwm7h37ijipo2hqa6.gif?w=600", 
+          "instructions": "1. Step feet wide and turn front foot out.\n2. Extend arms and reach forward, then down.\n3. Raise other arm up and gaze at your hand."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Core & Strength Flow",
+      "image": "https://i.pinimg.com/474x/c3/16/eb/c316ebaf445233046e2c3b91d30c6278.jpg",
+      "poses": [
+        {
+          "name": "Boat Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/qycnrgrlkywcpyin4vgu.gif?w=600",
+          "instructions": "1. Sit and lift your legs to a V-shape.\n2. Extend your arms forward, parallel to the floor.\n3. Engage your core and hold the position."
+        },
+        {
+          "name": "Side Plank Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/jpzzccg4e8pvdkvvlrd6.gif?w=600",
+          "instructions": "1. Begin in plank and shift weight to one side.\n2. Stack feet and raise top arm to the sky.\n3. Keep hips lifted and core strong."
+        },
+        {
+          "name": "Chair Pose",
+          "image": "https://www.sheknows.com/wp-content/uploads/2018/08/mmdauls4w7zlxwyauj39.gif?w=600",
+          "instructions": "1. Stand with feet together and bend knees.\n2. Reach arms overhead, keeping back straight.\n3. Shift weight into heels and hold."
+        }
+      ]
+    }
+  ]
+}
