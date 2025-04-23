@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} - Easy Yoga at Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('learn') }}">Learn</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ section.title }}</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="card-title h2 mb-4">{{ section.title }}</h1>
+                    
+                    {% if section.image %}
+                    <img src="{{ section.image }}" alt="{{ section.title }}" class="img-fluid rounded mb-4">
+                    {% endif %}
+                    
+                    <p class="lead">{{ section.content }}</p>
+                    
+                    {% if section.key_points %}
+                    <div class="mt-4">
+                        <h3 class="h4 mb-3">Key Points</h3>
+                        <ul class="list-group list-group-flush">
+                            {% for point in section.key_points %}
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>{{ point }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    {% if section.poses %}
+                    <div class="mt-4">
+                        <h3 class="h4 mb-3">Basic Yoga Poses</h3>
+                        {% for pose in section.poses %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title h5">{{ pose.name }}</h4>
+                                <p class="card-text">{{ pose.description }}</p>
+                                
+                                {% if pose.benefits %}
+                                <div class="mt-3">
+                                    <h5 class="h6">Benefits:</h5>
+                                    <p class="card-text text-muted">{{ pose.benefits }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if pose.image %}
+                                <img src="{{ pose.image }}" alt="{{ pose.name }}" class="img-fluid rounded mt-3">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if section.techniques %}
+                    <div class="mt-4">
+                        <h3 class="h4 mb-3">Breathing Techniques</h3>
+                        {% for technique in section.techniques %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title h5">{{ technique.name }}</h4>
+                                <p class="card-text">{{ technique.description }}</p>
+                                
+                                {% if technique.benefits %}
+                                <div class="mt-3">
+                                    <h5 class="h6">Benefits:</h5>
+                                    <p class="card-text text-muted">{{ technique.benefits }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if technique.instructions %}
+                                <div class="mt-3">
+                                    <h5 class="h6">Instructions:</h5>
+                                    <p class="card-text">{{ technique.instructions }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if section.tips %}
+                    <div class="mt-4">
+                        <h3 class="h4 mb-3">Tips for Beginners</h3>
+                        {% for tip in section.tips %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h4 class="card-title h5">{{ tip.title }}</h4>
+                                <p class="card-text">{{ tip.content }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if section.guidelines %}
+                    <div class="mt-4">
+                        <h3 class="h4 mb-3">Yoga Etiquette</h3>
+                        <ul class="list-group list-group-flush">
+                            {% for guideline in section.guidelines %}
+                            <li class="list-group-item">
+                                <i class="fas fa-clipboard-check text-secondary me-2"></i>{{ guideline }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between mb-4">
+                {% if section.id > 1 %}
+                <a href="{{ url_for('learn_section', section_id=section.id-1) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left"></i> Previous Section
+                </a>
+                {% else %}
+                <div></div>
+                {% endif %}
+                
+                {% if section.id < sections|length %}
+                <a href="{{ url_for('learn_section', section_id=section.id+1) }}" class="btn btn-primary">
+                    Next Section <i class="fas fa-arrow-right"></i>
+                </a>
+                {% else %}
+                <a href="{{ url_for('index') }}" class="btn btn-success">
+                    Take the Quiz <i class="fas fa-question-circle"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .text-primary {
+        color: #4CAF50 !important;
+    }
+    .text-success {
+        color: #4CAF50 !important;
+    }
+    .text-info {
+        color: #2196F3 !important;
+    }
+    .text-warning {
+        color: #FF9800 !important;
+    }
+    .text-secondary {
+        color: #607D8B !important;
+    }
+    .breadcrumb-item a {
+        color: #4CAF50;
+    }
+    .breadcrumb-item.active {
+        color: #607D8B;
+    }
+</style>
+{% endblock %} 

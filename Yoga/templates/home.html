@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Easy Yoga at Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 mb-4">Welcome to Easy Yoga at Home</h1>
+        <p class="lead mb-4">Learn basic yoga poses and test your knowledge with our interactive quiz.</p>
+        
+        <div class="row mt-5">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">Learn</h3>
+                        <p class="card-text">Discover basic yoga poses and principles for your home practice.</p>
+                        <a href="{{ url_for('learn') }}" class="btn btn-outline-primary">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">Quiz</h3>
+                        <p class="card-text">Test your knowledge of yoga poses and principles.</p>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Take Quiz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .card {
+        transition: transform 0.3s ease;
+        margin-bottom: 20px;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .list-group-item {
+        border: none;
+        padding: 10px 0;
+    }
+    .fa-3x {
+        color: #4CAF50;
+    }
+</style>
+{% endblock %} 
