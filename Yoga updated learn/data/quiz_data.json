@@ -1,0 +1,55 @@
+{
+    "questions": [
+        {
+            "id": 1,
+            "question": "What is the most important aspect of yoga practice?",
+            "options": ["Flexibility", "Breathing", "Strength", "Balance"],
+            "correct": "Breathing"
+        },
+        {
+            "id": 2,
+            "question": "Which of these is a basic yoga pose for beginners?",
+            "options": ["Downward Dog", "Crow Pose", "Headstand", "Wheel Pose"],
+            "correct": "Downward Dog"
+        },
+        {
+            "id": 3,
+            "question": "How long should you hold a yoga pose?",
+            "options": ["5-10 seconds", "30-60 seconds", "2-3 minutes", "As long as possible"],
+            "correct": "30-60 seconds"
+        },
+        {
+            "id": 4,
+            "question": "During Cat-Cow, when do you inhale?",
+            "options": [
+                "When you round your spine",
+                "When you arch your back",
+                "When you hold still",
+                "Anytime"
+            ],
+            "correct": "When you arch your back"
+        },
+        {
+            "id": 5,
+            "question": "Which of the following is a tree pose?",
+            "type": "image",
+            "options": [
+                {
+                    "text": "Option 1",
+                    "image": "https://www.sheknows.com/wp-content/uploads/2018/08/qfvckayzohxmqjhodhee.gif?w=600",
+                    "correct": false
+                },
+                {
+                    "text": "Option 2",
+                    "image": "https://www.sheknows.com/wp-content/uploads/2018/08/ecfie66ui55vvzpixhhc.gif?w=600",
+                    "correct": false
+                },
+                {
+                    "text": "Option 3",
+                    "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gijnkznlgwzt0bcb1bgp.gif?w=600",
+                    "correct": true
+                }
+            ]
+        }
+    ]
+}

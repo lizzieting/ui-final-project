@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flow.title }}{% endblock %}
+
+{% block content %}
+<div class="col-md-6 mx-auto text-center">
+    <h1 class="mb-4">{{ flow.title }}</h1>
+    <img src="{{ flow.image }}" alt="{{ flow.title }}" class="img-fluid mb-3" style="max-height: 300px;">
+
+    <div class="mt-3">
+        <a href="{{ url_for('start_flow', flow_id=flow.id) }}" class="btn btn-success">Start Now</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.list-group-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.form-check-input:checked + .form-check-label {
+    background-color: #e9ecef;
+}
+
+.progress {
+    height: 25px;
+}
+
+.progress-bar {
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.quiz-progress {
+    transition: width 0.3s ease-in-out;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+} 
