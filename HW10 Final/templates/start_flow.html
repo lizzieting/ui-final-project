@@ -12,7 +12,7 @@
             <img src="{{ pose.image }}" alt="{{ pose.name }}" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
         </div>
 
-        <!-- Instructions -->
+        <!-- Pose Instructions -->
         <div class="col-md-6">
             <h4 class="mb-3">{{ pose.name }}</h4>
             <p class="lead">{{ pose.instructions | replace('\n', '<br>') | safe }}</p>
