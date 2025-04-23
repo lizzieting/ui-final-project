@@ -49,6 +49,7 @@ def flow(flow_id):
         return "Flow not found", 404
     return render_template('flow.html', flow=flow)
 
+
 @app.route('/flow/<flow_id>/start')
 @app.route('/flow/<flow_id>/start/<int:pose_index>')
 def start_flow(flow_id, pose_index=0):
@@ -63,6 +64,7 @@ def start_flow(flow_id, pose_index=0):
     return render_template('start_flow.html', flow=flow, pose=pose,
                            index=pose_index, total=total_poses)
 
+
 @app.route('/start-quiz')
 def index():
     # Generate a new session ID for this quiz attempt
@@ -74,19 +76,31 @@ def index():
 
 @app.route('/quiz/<int:question_id>', methods=['GET', 'POST'])
 def quiz(question_id):
+    # Check if there's an active quiz session
     if 'quiz_session' not in session:
         return redirect(url_for('index'))
         
     if request.method == 'POST':
+        # Store the answer
         answer = request.form.get('answer')
+        if not answer:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': 'Please select an answer'}), 400
+            flash('Please select an answer before proceeding.', 'warning')
+            return redirect(url_for('quiz', question_id=question_id))
+            
         question = quiz_data['questions'][question_id - 1]
-
+        
+        # Determine if the answer is correct based on question type
         if question.get('type') == 'image':
+            # For image questions, find the selected option and check its 'correct' flag
             selected_option = next((opt for opt in question['options'] if opt['text'] == answer), None)
             is_correct = selected_option and selected_option['correct']
         else:
+            # For text questions, compare with the 'correct' field
             is_correct = answer == question['correct']
-
+        
+        # Save to database with session ID
         quiz_answer = QuizAnswer(
             question_id=question_id,
             answer=answer,
@@ -95,22 +109,28 @@ def quiz(question_id):
         )
         db.session.add(quiz_answer)
         db.session.commit()
-
-        next_question_url = url_for('quiz', question_id=question_id + 1) \
-            if question_id < len(quiz_data['questions']) else url_for('results')
         
-        return jsonify({
-            'correct': is_correct,
-            'next_url': next_question_url
-        })
+        # If this is an AJAX request, return JSON response
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            next_url = url_for('results') if question_id >= len(quiz_data['questions']) else url_for('quiz', question_id=question_id + 1)
+            return jsonify({
+                'correct': is_correct,
+                'next_url': next_url
+            })
+        
+        # Regular form submission - redirect to next question or results
+        if question_id < len(quiz_data['questions']):
+            return redirect(url_for('quiz', question_id=question_id + 1))
+        else:
+            return redirect(url_for('results'))
     
-    # GET: render question
+    # GET request - show the question
     if 1 <= question_id <= len(quiz_data['questions']):
         question = quiz_data['questions'][question_id - 1]
-        return render_template('quiz.html',
-                               question=question,
-                               current_question=question_id,
-                               total_questions=len(quiz_data['questions']))
+        return render_template('quiz.html', 
+                             question=question,
+                             current_question=question_id,
+                             total_questions=len(quiz_data['questions']))
     return redirect(url_for('index'))
 
 @app.route('/results')
@@ -142,4 +162,4 @@ if __name__ == '__main__':
         # Drop all tables and recreate them to ensure the schema is up to date
         db.drop_all()
         db.create_all()
-    app.run(debug=True, port=5001) 
+    app.run(debug=True,port = 5001) 
