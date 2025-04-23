@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Learn - Easy Yoga at Home{% endblock %}
+
+{% block content %}
+<div class="col-md-6 mx-auto">
+    <h1 class="display-4 mb-4 text-center">Learn Basic Yoga Flows</h1>
+
+    {% for flow in flows %}
+<div class="card d-flex flex-row align-items-center mb-4 p-2 shadow-sm">
+    <img src="{{ flow.image if flow.image.startswith('http') else url_for('static', filename=flow.image.split('static/')[-1]) }}"
+         alt="{{ flow.title }}" class="img-fluid" style="max-width: 100px; margin-right: 15px;">
+        <h5 class="mb-0">
+            <a href="{{ url_for('flow', flow_id=flow.id) }}">{{ flow.title }}</a>
+          </h5>
+          
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
