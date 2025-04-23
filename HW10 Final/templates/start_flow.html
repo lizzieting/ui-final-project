@@ -7,19 +7,16 @@
     <h2 class="text-center mb-4">{{ flow.title }} - Pose {{ index + 1 }} of {{ total }}</h2>
 
     <div class="row align-items-center mb-5">
-        <!-- Pose Image -->
         <div class="col-md-6 text-center mb-4 mb-md-0">
             <img src="{{ pose.image }}" alt="{{ pose.name }}" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
         </div>
 
-        <!-- Instructions -->
         <div class="col-md-6">
             <h4 class="mb-3">{{ pose.name }}</h4>
             <p class="lead">{{ pose.instructions | replace('\n', '<br>') | safe }}</p>
           </div>
     </div>
 
-    <!-- Navigation Buttons -->
     <div class="d-flex justify-content-between">
         {% if index > 0 %}
         <a href="{{ url_for('start_flow', flow_id=flow.id, pose_index=index-1) }}" class="btn btn-outline-secondary">← Back</a>

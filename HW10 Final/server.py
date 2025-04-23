@@ -162,4 +162,4 @@ if __name__ == '__main__':
         # Drop all tables and recreate them to ensure the schema is up to date
         db.drop_all()
         db.create_all()
-    app.run(debug=True,port = 5001) 
+    app.run(debug=True,port = 5001)  # Run on port 5001
