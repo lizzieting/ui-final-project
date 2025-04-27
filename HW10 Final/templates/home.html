@@ -3,51 +3,183 @@
 {% block title %}Home - Easy Yoga at Home{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8 mx-auto text-center">
-        <h1 class="display-4 mb-4">Welcome to Easy Yoga at Home</h1>
-        <p class="lead mb-4">Learn basic yoga poses and test your knowledge with our interactive quiz.</p>
-        
-        <div class="row mt-5">
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Learn</h3>
-                        <p class="card-text">Discover basic yoga poses and principles for your home practice.</p>
-                        <a href="{{ url_for('learn') }}" class="btn btn-outline-primary">Start Learning</a>
-                    </div>
-                </div>
+<div class="hero-section text-center">
+    <h1 class="main-title">Welcome to Easy Yoga at Home</h1>
+    <p class="subtitle">Move, breathe, and relax — anytime, anywhere.</p>
+
+    <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide center">
+                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/0b597405-9fd3-41d7-8617-32b5915f1073/KN_GlowGetter-35.jpg?format=2500w" alt="Yoga Pose 1">
             </div>
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Quiz</h3>
-                        <p class="card-text">Test your knowledge of yoga poses and principles.</p>
-                        <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Take Quiz</a>
-                    </div>
-                </div>
+            <div class="carousel-slide side">
+                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/d47435a7-14d4-44a9-8ca0-7a4a77ac913e/NR_SocialMediaContent-2.jpg?format=2500w" alt="Yoga Pose 2">
+            </div>
+            <div class="carousel-slide side">
+                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/a0263540-bd08-4b3b-9843-88edbde8219f/AITWEuropeSelects-142.jpg?format=2500w" alt="Yoga Pose 3">
+            </div>
+            <div class="carousel-slide side">
+                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/f2d9849d-ca09-4784-802f-2c5dedbd578e/EZ_BreathBodyConnection-8.jpg?format=2500w" alt="Yoga Pose 4">
             </div>
         </div>
     </div>
+
+    <div class="button-group mt-5">
+        <a href="{{ url_for('learn') }}" class="btn-outline">Start Learning</a>
+        <a href="{{ url_for('index') }}" class="btn-outline">Take Quiz</a>
+    </div>    
+
 </div>
+
+<script>
+const track = document.getElementById('carouselTrack');
+let slides = track.children;
+let index = 0;
+
+function moveCarousel() {
+    index = (index + 1) % slides.length;
+    updateSlides();
+}
+
+function updateSlides() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('center', 'side');
+    }
+    slides[index].classList.add('center');
+    slides[(index + 1) % slides.length].classList.add('side');
+    slides[(index + 2) % slides.length].classList.add('side');
+}
+
+setInterval(moveCarousel, 3000);
+updateSlides();
+</script>
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-    .card {
-        transition: transform 0.3s ease;
-        margin-bottom: 20px;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-    }
-    .list-group-item {
-        border: none;
-        padding: 10px 0;
-    }
-    .fa-3x {
-        color: #4CAF50;
-    }
+:root {
+    --base-color: #8BA888;
+    --accent-color: #f87965;
+    --background-color: #fffcf5;
+    --light-grey: #F5F5F5;
+    --dark-grey: #2C3E50;
+    --medium-grey: #BDC3C7;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, var(--background-color), var(--light-grey));
+    color: var(--dark-grey);
+    margin: 0;
+    padding: 0;
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--medium-grey);
+    margin-bottom: 2rem;
+}
+
+/* Carousel styles */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 1rem;
+}
+
+.carousel-slide {
+    flex: 0 0 25%;
+    opacity: 0.5;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+}
+
+.carousel-slide img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Center active image */
+.carousel-slide.center {
+    flex: 0 0 30%;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Side images */
+.carousel-slide.side {
+    flex: 0 0 20%;
+    opacity: 0.5;
+    transform: scale(0.8);
+}
+
+/* Buttons */
+.button-group a {
+    margin: 0 1rem;
+    display: inline-block;
+}
+
+.btn-custom {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.8rem 2.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: var(--base-color);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(139, 168, 136, 0.3);
+}
+
+.btn-outline {
+    border: 2px solid var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    padding: 0.8rem 2.2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(248, 121, 101, 0.3);
+}
 </style>
-{% endblock %} 
+{% endblock %}
