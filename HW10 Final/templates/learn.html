@@ -3,19 +3,110 @@
 {% block title %}Learn - Easy Yoga at Home{% endblock %}
 
 {% block content %}
-<div class="col-md-6 mx-auto">
-    <h1 class="display-4 mb-4 text-center">Learn Basic Yoga Flows</h1>
+<div class="hero-section text-center">
+    <h1 class="main-title">Learn Basic Yoga Flows</h1>
+    <p class="subtitle">Follow along with the flow that matches your goals.</p>
 
-    {% for flow in flows %}
-<div class="card d-flex flex-row align-items-center mb-4 p-2 shadow-sm">
-    <img src="{{ flow.image if flow.image.startswith('http') else url_for('static', filename=flow.image.split('static/')[-1]) }}"
-         alt="{{ flow.title }}" class="img-fluid" style="max-width: 100px; margin-right: 15px;">
-        <h5 class="mb-0">
-            <a href="{{ url_for('flow', flow_id=flow.id) }}">{{ flow.title }}</a>
-          </h5>
-          
-</div>
-{% endfor %}
 
-</div>
+    <div class="flow-list">
+        {% for flow in flows %}
+        <a href="{{ url_for('flow', flow_id=flow.id) }}" class="flow-btn">
+            <img src="{{ flow.image if flow.image.startswith('http') else url_for('static', filename=flow.image.split('static/')[-1]) }}"
+                 alt="{{ flow.title }}" class="flow-img">
+            <span class="flow-title">{{ flow.title }}</span>
+        </a>
+        {% endfor %}
+    </div>
+
+<style>
+    :root {
+        --base-color: #8BA888;
+        --accent-color: #f87965;
+        --background-color: #fffcf5;
+        --light-grey: #F5F5F5;
+        --dark-grey: #2C3E50;
+        --medium-grey: #BDC3C7;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, var(--background-color), var(--light-grey));
+        color: var(--dark-grey);
+        margin: 0;
+        padding: 0;
+    }
+    
+    .hero-section {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+        font-weight: 600;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+        color: var(--medium-grey);
+        margin-bottom: 2rem;
+    }
+    
+    .flow-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .flow-btn {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        padding-bottom: 1rem;
+        width: 350px;
+        height: 250px;
+        text-decoration: none;
+        border: 2px solid var(--accent-color);
+        border-radius: 12px;
+        overflow: hidden;            
+        transition: all 0.3s ease;
+    }
+
+    .flow-img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        object-position: center center;  
+        display: block;      
+    }
+
+    .flow-title {
+        padding: 0 1rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--accent-color);
+        text-align: center;
+        margin-top: 1.3rem;
+    }
+
+    .flow-btn:hover {
+        background-color: var(--accent-color);
+        color: #F5F5F5;
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 16px rgba(248, 121, 101, 0.3);
+    }
+
+    .flow-btn:hover .flow-title {
+        color: #fffcf5;
+    }
+
+    </style>
 {% endblock %}
