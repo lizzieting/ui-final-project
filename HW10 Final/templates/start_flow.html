@@ -4,17 +4,17 @@
 
 {% block content %}
 <div class="container my-5">
-    <h2 class="text-center mb-4">{{ flow.title }} - Pose {{ index + 1 }} of {{ total }}</h2>
+    <h2 class="text-center main-title">{{ flow.title }} - Pose {{ index + 1 }} of {{ total }}</h2>
 
     <div class="row align-items-center mb-5">
         <!-- Pose Image -->
         <div class="col-md-6 text-center mb-4 mb-md-0">
-            <img src="{{ pose.image }}" alt="{{ pose.name }}" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
+            <img src="{{ pose.image }}" alt="{{ pose.name }}" class="pose-img rounded shadow-sm" style="max-height: 400px;">
         </div>
 
         <!-- Pose Instructions -->
         <div class="col-md-6">
-            <h4 class="mb-3">{{ pose.name }}</h4>
+            <h4 class=" pose-name mb-3">{{ pose.name }}</h4>
             <p class="lead">{{ pose.instructions | replace('\n', '<br>') | safe }}</p>
           </div>
     </div>
@@ -34,4 +34,44 @@
         {% endif %}
     </div>
 </div>
+
+<style>
+    :root {
+        --base-color: #8BA888;
+        --accent-color: #f87965;
+        --background-color: #fffcf5;
+        --light-grey: #F5F5F5;
+        --dark-grey: #2C3E50;
+        --medium-grey: #BDC3C7;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, var(--background-color), var(--light-grey));
+        color: var(--dark-grey);
+        margin: 0;
+        padding: 0;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+        font-weight: 600;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+    }
+
+    .pose-name {
+        color:  #2C3E50; 
+    }
+
+    .pose-img {
+        border: 2px solid var(--accent-color);
+        border-radius: 12px;
+    }
+
+
+
+
+    </style>
+
 {% endblock %}

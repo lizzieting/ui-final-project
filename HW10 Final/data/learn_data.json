@@ -3,6 +3,7 @@
     {
       "id": "1", 
       "title": "Breathe & Meditate",
+      "description": "Ease into your practice with gentle postures, deep breathing exercises, and mindfulness techniques designed to calm the mind, reduce stress, and cultivate inner peace.",
       "image": "https://i.pinimg.com/736x/22/f8/06/22f806046b5eddb72b4648936a7074b9.jpg",
       "poses": [
         {
@@ -25,6 +26,7 @@
     {
       "id": "2", 
       "title": "Gentle Flow",
+      "description": "A slow-paced sequence of foundational poses that improve flexibility and joint mobility, perfect for beginners or anyone looking for a restorative, low-impact session.",
       "image": "https://i.pinimg.com/736x/ac/4f/df/ac4fdfad7a930efe6bbcdca3fe0a0098.jpg",
       "poses": [
         {
@@ -47,6 +49,7 @@
     {
       "id": "3",
       "title": "Core & Strength Flow",
+      "description": "Power up your practice with dynamic movements and targeted core work that build stability, tone muscles, and boost overall endurance—ideal if you want to feel strong and energized.",
       "image": "https://i.pinimg.com/736x/7d/16/6f/7d166fd207b6fd1e3afff6d247528a62.jpg",
       "poses": [
         {
