@@ -3,16 +3,16 @@
 {% block title %}{{ flow.title }}{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('learn') }}" class="btn btn-secondary back-btn">
-    ← Back
-  </a>
+<div class="mt-4">
+    <a href="{{ url_for('learn') }}" class="btn custom-btn-outline">← Back</a>
+</div>
 <div class="hero-section text-center">
     <h1 class="main-title">{{ flow.title }}</h1>
     <p class="subtitle">{{ flow.description }}</p>
     <img src="{{ flow.image }}" alt="{{ flow.title }}" class="flow-img" style="max-height: 300px;">
 
     <div class="mt-3">
-        <a href="{{ url_for('start_flow', flow_id=flow.id) }}" class="btn btn-success">Start Now</a>
+        <a href="{{ url_for('start_flow', flow_id=flow.id) }}" class="btn main-btn">Start Now</a>
     </div>
 </div>
 
@@ -62,11 +62,35 @@
         border-radius: 12px;
     }
 
-    back-btn {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-    }
+    .main-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.main-btn:hover {
+    background-color: #e46b58;
+    color: var(--medium-grey);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 7px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.custom-btn-outline:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
     
     </style>
 

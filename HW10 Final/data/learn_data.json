@@ -9,17 +9,23 @@
         {
           "name": "Standing Side Stretch",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/vv7a9gdonpr46ocl7vk4.gif?w=600",
-          "instructions": "1. Stand tall and raise both arms overhead.\n2. Clasp hands and gently lean to one side.\n3. Breathe deeply and switch sides."
+          "instructions": "1. Stand tall and raise both arms overhead.\n2. Clasp hands and gently lean to one side.\n3. Breathe deeply and switch sides.", 
+          "duration": "1 min",
+          "audio": "standing-side-stretch.mp3"
         },
         {
           "name": "Tree Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gijnkznlgwzt0bcb1bgp.gif?w=600", 
-          "instructions": "1. Balance on one leg and place the other on your inner thigh.\n2. Bring hands to heart center or raise overhead.\n3. Focus on a point and breathe steadily."
+          "instructions": "1. Balance on one leg and place the other on your inner thigh.\n2. Bring hands to heart center or raise overhead.\n3. Focus on a point and breathe steadily.", 
+          "duration": "1 min",
+          "audio": "tree-pose.mp3"
         },
         {
           "name": "Bound Angle Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gmgcbkyssvaetasg6ux3.gif?w=600", 
-          "instructions": "1. Sit with feet together and knees out to the sides.\n2. Hold your feet or ankles with your hands.\n3. Gently press knees down and breathe."
+          "instructions": "1. Sit with feet together and knees out to the sides.\n2. Hold your feet or ankles with your hands.\n3. Gently press knees down and breathe.", 
+          "duration": "2 min",
+          "audio": "bound-angle-pose.mp3"
         }
       ]
     },
@@ -32,17 +38,23 @@
         {
           "name": "Seated Forward Bend",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/wqwoywcreesk3jvgeizf.gif?w=600",
-          "instructions": "1. Sit with legs extended in front of you.\n2. Inhale, then exhale and fold forward from the hips.\n3. Reach for your feet and relax your neck."
+          "instructions": "1. Sit with legs extended in front of you.\n2. Inhale, then exhale and fold forward from the hips.\n3. Reach for your feet and relax your neck.", 
+          "duration": "1 min",
+          "audio": "seated-forward-bend.mp3"
         },
         {
           "name": "Cat-Cow Stretch",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/jwmpi0rqipzgycnv7aqf.gif?w=600",
-          "instructions": "1. Start on all fours with wrists under shoulders.\n2. Inhale to arch your back (cow), lifting your head.\n3. Exhale to round your spine (cat), tucking chin."
+          "instructions": "1. Start on all fours with wrists under shoulders.\n2. Inhale to arch your back (cow), lifting your head.\n3. Exhale to round your spine (cat), tucking chin.", 
+          "duration": "1 min",
+          "audio": "cat-cow.mp3"
         },
         {
           "name": "Triangle Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/j6ulwm7h37ijipo2hqa6.gif?w=600", 
-          "instructions": "1. Step feet wide and turn front foot out.\n2. Extend arms and reach forward, then down.\n3. Raise other arm up and gaze at your hand."
+          "instructions": "1. Step feet wide and turn front foot out.\n2. Extend arms and reach forward, then down.\n3. Raise other arm up and gaze at your hand.", 
+          "duration": "1 min",
+          "audio": "triangle-pose.mp3"
         }
       ]
     },
@@ -55,17 +67,23 @@
         {
           "name": "Boat Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/qycnrgrlkywcpyin4vgu.gif?w=600",
-          "instructions": "1. Sit and lift your legs to a V-shape.\n2. Extend your arms forward, parallel to the floor.\n3. Engage your core and hold the position."
+          "instructions": "1. Sit and lift your legs to a V-shape.\n2. Extend your arms forward, parallel to the floor.\n3. Engage your core and hold the position.", 
+          "duration": "1 min",
+          "audio": "boat-pose.mp3"
         },
         {
           "name": "Side Plank Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/jpzzccg4e8pvdkvvlrd6.gif?w=600",
-          "instructions": "1. Begin in plank and shift weight to one side.\n2. Stack feet and raise top arm to the sky.\n3. Keep hips lifted and core strong."
+          "instructions": "1. Begin in plank and shift weight to one side.\n2. Stack feet and raise top arm to the sky.\n3. Keep hips lifted and core strong.", 
+          "duration": "1 min",
+          "audio": "side-plank-pose.mp3"
         },
         {
           "name": "Chair Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/mmdauls4w7zlxwyauj39.gif?w=600",
-          "instructions": "1. Stand with feet together and bend knees.\n2. Reach arms overhead, keeping back straight.\n3. Shift weight into heels and hold."
+          "instructions": "1. Stand with feet together and bend knees.\n2. Reach arms overhead, keeping back straight.\n3. Shift weight into heels and hold.", 
+          "duration": "2 min",
+          "audio": "chair-pose.mp3"
         }
       ]
     }

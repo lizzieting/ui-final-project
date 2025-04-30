@@ -19,18 +19,35 @@
           </div>
     </div>
 
+    {% if pose.audio %}
+<div class="text-center mt-3">
+  <button class="btn btn-secondary" onclick="toggleAudio()"> ▶️ Audio</button>
+  <audio id="audio-guide" src="{{ url_for('static', filename='audio/' ~ pose.audio) }}"></audio>
+</div>
+{% endif %}
+
+{% if pose.duration %}
+<div class="timer-wrapper mt-4">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-label">Hold for {{ pose.duration }}</p>
+</div>
+{% endif %}
+
+
     <!-- Navigation Buttons -->
     <div class="d-flex justify-content-between">
         {% if index > 0 %}
-        <a href="{{ url_for('start_flow', flow_id=flow.id, pose_index=index-1) }}" class="btn btn-outline-secondary">← Back</a>
+        <a href="{{ url_for('start_flow', flow_id=flow.id, pose_index=index-1) }}" class=" btn btn-outline-secondary">← Back</a>
         {% else %}
         <span></span>
         {% endif %}
 
         {% if index < total - 1 %}
-        <a href="{{ url_for('start_flow', flow_id=flow.id, pose_index=index+1) }}" class="btn btn-primary">Next →</a>
+        <a href="{{ url_for('start_flow', flow_id=flow.id, pose_index=index+1) }}" class="btn main-btn">Next →</a>
         {% else %}
-        <a href="{{ url_for('home') }}" class="btn btn-success">Finish</a>
+        <a href="{{ url_for('learn') }}" class="btn main-btn">Finish</a>
         {% endif %}
     </div>
 </div>
@@ -60,18 +77,91 @@
         margin-bottom: 1rem;
     }
 
-    .pose-name {
-        color:  #2C3E50; 
-    }
-
     .pose-img {
         border: 2px solid var(--accent-color);
         border-radius: 12px;
     }
 
+    .main-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+}
 
+.main-btn:hover {
+    background-color: #e46b58;
+    color: var(--medium-grey);
+}
+
+.custom-btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    text-decoration: none;
+}
+
+.custom-btn-outline:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.progress-bar {
+    width: 100%;
+    max-width: 400px;
+    height: 12px;
+    background-color: var(--light-grey);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 0 auto 0.5rem auto;
+    border: 1px solid var(--medium-grey);
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0%;
+    transition: width 60s linear;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: var(--medium-grey);
+    font-weight: 500;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.timer-wrapper {
+  text-align: center;
+}
 
 
     </style>
+
+<script>
+    //audio button
+    function toggleAudio() {
+      const audio = document.getElementById("audio-guide");
+      if (!audio) return;
+  
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+  
+    // animation
+    document.addEventListener("DOMContentLoaded", function () {
+      const fill = document.getElementById("progress-fill");
+      if (fill) {
+        setTimeout(() => {
+          fill.style.width = "100%";
+        }, 100); 
+      }
+    });
+  </script>  
+
 
 {% endblock %}
