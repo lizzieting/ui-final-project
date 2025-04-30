@@ -8,7 +8,7 @@ import uuid
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'your-secret-key-here'  # Required for flash messages and sessions
+app.secret_key = 'your-secret-key-here'  
 db = SQLAlchemy(app)
 
 # Database Model for storing quiz answers
