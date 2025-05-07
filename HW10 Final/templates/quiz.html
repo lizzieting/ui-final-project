@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Quiz - Simple Yoga{% endblock %}
+{% block title %}Quiz - Easy Yoga at Home{% endblock %}
 
 {% block content %}
-<div class="quiz-container">
+<div class="hero-section text-center">
+    <h1 class="main-title">Yoga Knowledge Quiz</h1>
+    <p class="subtitle">Test your understanding of yoga flows and techniques!</p>
+</div>
+
+<div class="quiz-container no-background">
     <main class="quiz-content">
         <!-- Progress Bar -->
         <div class="progress mb-4">
-            <div id="quiz-progress" class="progress-bar" role="progressbar" 
+            <div id="quiz-progress" class="progress-bar custom-progress-bar" role="progressbar" 
                  aria-valuenow="{{ current_question }}" 
                  aria-valuemin="1" 
                  aria-valuemax="{{ total_questions }}" 
@@ -16,313 +21,215 @@
         </div>
 
         <h2 class="question-text">{{ question.question }}</h2>
-        
+
         <form id="quizForm" action="{{ url_for('quiz', question_id=current_question) }}" method="POST">
-            {% if question.get('type') == 'image' %}
-                <div class="image-options">
-                    {% for option in question.options %}
-                    <div class="image-option">
-                        <label>
-                            <input type="radio" name="answer" value="{{ option.text }}" required class="visually-hidden">
-                            <div class="image-container">
-                                <img src="{{ option.image }}" alt="{{ option.text }}">
-                            </div>
-                        </label>
+            <div class="text-options {% if question.get('type') == 'image' %}image-layout{% endif %}">
+                {% for option in question.options %}
+                <div class="text-option" data-answer="{{ option.text if option is mapping else option }}">
+                    <div class="option-content">
+                        <div class="option-letter">{{ ['A', 'B', 'C', 'D'][loop.index0] }}.</div>
+                        <div class="option-text">
+                            {% if option.image %}
+                            <img src="{{ option.image }}" alt="option image" class="quiz-image-option">
+                            {% else %}
+                                {{ option.text if option is mapping else option }}
+                            {% endif %}
+                        </div>
                     </div>
-                    {% endfor %}
                 </div>
-            {% else %}
-                <div class="text-options">
-                    {% for option in question.options %}
-                    <div class="text-option">
-                        <label>
-                            <input type="radio" name="answer" value="{{ option }}" required class="visually-hidden">
-                            <div class="option-content">
-                                <div class="option-letter">{{ ['a', 'b', 'c', 'd'][loop.index0] }}.</div>
-                                <div class="option-text">{{ option }}</div>
-                            </div>
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+                {% endfor %}
+            </div>
 
             <div class="next-button">
-                <button type="submit">
-                    next
-                    <i class="fas fa-arrow-right"></i>
+                <button type="submit" disabled id="nextBtn">
+                    Next <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
         </form>
     </main>
 </div>
-
-<!-- Feedback Modal -->
-<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <h5 class="modal-title" id="feedbackModalLabel">Result</h5>
-            </div>
-            <div class="modal-body" id="feedbackMessage"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="nextButton">Next</button>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
-{% block extra_css %}
-<style>
-.quiz-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.progress {
-    height: 8px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    background-color: #FF7F6F;
-    transition: width 0.6s ease;
-}
-
-.question-text {
-    text-align: center;
-    color: #333;
-    font-size: 2rem;
-    font-weight: normal;
-    margin-bottom: 4rem;
-}
-
-.text-options {
-    max-width: 800px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 1rem;
-}
-
-.text-option {
-    width: 100%;
-}
-
-.text-option label {
-    width: 100%;
-    display: block;
-}
-
-.option-content {
-    display: flex;
-    align-items: center;
-    padding: 2rem;
-    background: white;
-    border: 2px solid #eee;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 100px;
-}
-
-.option-content:hover {
-    border-color: #FF7F6F;
-    transform: translateY(-2px);
-}
-
-.option-letter {
-    color: #FF7F6F;
-    font-size: 1.5rem;
-    margin-right: 1.5rem;
-    font-weight: 500;
-    opacity: 0.8;
-}
-
-.option-text {
-    color: #333;
-    font-size: 1.5rem;
-}
-
-input[type="radio"]:checked + .option-content {
-    border-color: #4CAF50;
-    background-color: #f0fff0;
-}
-
-input[type="radio"]:checked + .option-content .option-letter {
-    color: #4CAF50;
-}
-
-.next-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 4rem;
-}
-
-.next-button button {
-    background-color: #FF7F6F;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 2.5rem;
-    transition: all 0.3s ease;
-    min-width: 160px;
-    justify-content: center;
-}
-
-.next-button button:hover {
-    background-color: #ff6b5b;
-    transform: translateX(5px);
-}
-
-.image-options {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.image-option {
-    flex: 0 1 300px;
-}
-
-.image-container {
-    border: 2px solid #eee;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.image-container:hover {
-    border-color: #FF7F6F;
-    transform: translateY(-5px);
-}
-
-.image-container img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-input[type="radio"]:checked + .image-container {
-    border-color: #4CAF50;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* Modal Styles */
-.modal-content {
-    border-radius: 15px;
-    border: none;
-}
-
-.modal-header {
-    border-bottom: none;
-    padding: 1.5rem 1.5rem 0.5rem;
-}
-
-.modal-body {
-    font-size: 1.5rem;
-    padding: 1.5rem;
-}
-
-.modal-footer {
-    border-top: none;
-    justify-content: center;
-    padding: 0.5rem 1.5rem 1.5rem;
-}
-
-#nextButton {
-    background-color: #FF7F6F;
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
-    min-width: 120px;
-}
-
-#nextButton:hover {
-    background-color: #ff6b5b;
-}
-</style>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+{% block extra_js %}<script>
+document.addEventListener('DOMContentLoaded', function () {
     const progressBar = document.getElementById('quiz-progress');
     const currentQuestion = parseInt(progressBar.getAttribute('aria-valuenow'));
     const totalQuestions = parseInt(progressBar.getAttribute('aria-valuemax'));
     progressBar.style.width = (currentQuestion / totalQuestions * 100) + '%';
 
-    document.querySelectorAll('.image-option').forEach(option => {
-        option.addEventListener('click', function() {
-            document.querySelectorAll('.image-option').forEach(opt => opt.classList.remove('selected'));
-            this.classList.add('selected');
-            this.querySelector('input[type="radio"]').checked = true;
-        });
-    });
-
+    const options = document.querySelectorAll('.text-option');
+    const nextBtn = document.getElementById('nextBtn');
     const form = document.getElementById('quizForm');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        fetch(form.action, {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: formData
-        })
-        .then(resp => {
-            if (!resp.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return resp.json();
-        })
-        .then(data => {
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            feedbackMessage.textContent = data.correct ? "✅ Correct!" : "❌ Incorrect!";
-            const feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
-            feedbackModal.show();
+    let selected = false;
+    let chosen = "";
 
-            document.getElementById('nextButton').onclick = function () {
-                window.location.href = data.next_url;
-            };
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // If there's an error, just move to the next question
-            const nextQuestionId = currentQuestion + 1;
-            if (nextQuestionId <= totalQuestions) {
-                window.location.href = `/quiz/${nextQuestionId}`;
-            } else {
-                window.location.href = '/results';
-            }
+    options.forEach(option => {
+        option.addEventListener('click', function () {
+            if (selected) return;
+            selected = true;
+            chosen = this.dataset.answer;
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+                body: `answer=${encodeURIComponent(chosen)}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                option.classList.add(data.correct ? 'correct' : 'incorrect');
+                if (!data.correct) {
+                    options.forEach(opt => {
+                        if (opt.dataset.answer === data.correct_answer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+                nextBtn.disabled = false;
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    window.location.href = data.next_url;
+                }
+            });
         });
     });
 });
-</script>
-{% endblock %}
+</script>{% endblock %}
 
+{% block extra_css %}<style>
+:root {
+    --base-color: #8BA888;
+    --accent-color: #f87965;
+    --background-color: #fffcf5;
+    --light-grey: #F5F5F5;
+    --dark-grey: #2C3E50;
+    --medium-grey: #BDC3C7;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    background-image: none;
+    color: var(--dark-grey);
+    margin: 0;
+    padding: 0;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--medium-grey);
+    margin-bottom: 2rem;
+}
+
+.quiz-container.no-background {
+    background: var(--background-color);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.question-text {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--dark-grey);
+}
+
+.text-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 2rem 1rem;
+    justify-content: center;
+}
+
+.text-options.image-layout {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.option-content {
+    padding: 1.5rem;
+    border: 2px solid var(--light-grey);
+    border-radius: 12px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    height: 100%;
+}
+
+.option-content:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.text-option.correct .option-content {
+    border-color: #4CAF50;
+    background-color: #e6ffe6;
+}
+
+.text-option.incorrect .option-content {
+    border-color: #f44336;
+    background-color: #ffe6e6;
+}
+
+.option-letter {
+    font-weight: 600;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.option-text {
+    font-size: 1.2rem;
+    color: var(--dark-grey);
+}
+
+.next-button {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.next-button button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.next-button button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.custom-progress-bar {
+    background-color: var(--accent-color);
+    transition: width 0.6s ease;
+}
+.quiz-image-option {
+    width: 250px;
+    height: 180px;  /* Increased from auto for consistent height */
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+</style>{% endblock %}

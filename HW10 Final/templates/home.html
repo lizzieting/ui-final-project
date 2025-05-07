@@ -1,33 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Easy Yoga at Home{% endblock %}
+{% block title %}Home - Simple Yoga{% endblock %}
 
 {% block content %}
 <div class="hero-section text-center">
-    <h1 class="main-title">Welcome to Easy Yoga at Home</h1>
+    <h1 class="main-title">Welcome to Simple Yoga</h1>
     <p class="subtitle">Move, breathe, and relax — anytime, anywhere.</p>
+    <div class="carousel-wrapper">
 
-    <div class="carousel-container">
-        <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide center">
-                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/0b597405-9fd3-41d7-8617-32b5915f1073/KN_GlowGetter-35.jpg?format=2500w" alt="Yoga Pose 1">
-            </div>
-            <div class="carousel-slide side">
-                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/d47435a7-14d4-44a9-8ca0-7a4a77ac913e/NR_SocialMediaContent-2.jpg?format=2500w" alt="Yoga Pose 2">
-            </div>
-            <div class="carousel-slide side">
-                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/a0263540-bd08-4b3b-9843-88edbde8219f/AITWEuropeSelects-142.jpg?format=2500w" alt="Yoga Pose 3">
-            </div>
-            <div class="carousel-slide side">
-                <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/f2d9849d-ca09-4784-802f-2c5dedbd578e/EZ_BreathBodyConnection-8.jpg?format=2500w" alt="Yoga Pose 4">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide center">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/0b597405-9fd3-41d7-8617-32b5915f1073/KN_GlowGetter-35.jpg?format=2500w" alt="Yoga Pose 1">
+                </div>
+                <div class="carousel-slide side">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/d47435a7-14d4-44a9-8ca0-7a4a77ac913e/NR_SocialMediaContent-2.jpg?format=2500w" alt="Yoga Pose 2">
+                </div>
+                <div class="carousel-slide side">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/a0263540-bd08-4b3b-9843-88edbde8219f/AITWEuropeSelects-142.jpg?format=2500w" alt="Yoga Pose 3">
+                </div>
+                <div class="carousel-slide side">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5d31ed671abe780001b2964d/f2d9849d-ca09-4784-802f-2c5dedbd578e/EZ_BreathBodyConnection-8.jpg?format=2500w" alt="Yoga Pose 4">
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="button-group mt-5">
-        <a href="{{ url_for('learn') }}" class="btn-outline">Start Learning</a>
-        <a href="{{ url_for('index') }}" class="btn-outline">Take Quiz</a>
-    </div>    
+    <div class="button-stack mt-5">
+        <a href="{{ url_for('learn') }}" class="btn-primary-home mb-3">Start Learning</a>
+        <a href="{{ url_for('index') }}" class="btn-secondary-home">Take Quiz</a>
+    </div>       
 
 </div>
 
@@ -77,13 +79,13 @@ body {
 }
 
 .hero-section {
-    min-height: 100vh;
+    padding: 4rem 1rem 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 2rem;
 }
+
 
 .main-title {
     font-size: 3rem;
@@ -116,10 +118,17 @@ body {
 
 .carousel-slide {
     flex: 0 0 25%;
-    opacity: 0.5;
-    transform: scale(0.8);
-    transition: all 0.5s ease;
+    opacity: 0.8;
+    transform: scale(0.92);
+    transition: all 0.6s ease-in-out;
 }
+
+.carousel-slide.center {
+    flex: 0 0 30%;
+    opacity: 1;
+    transform: scale(1);
+}
+
 
 .carousel-slide img {
     width: 100%;
@@ -127,12 +136,6 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Center active image */
-.carousel-slide.center {
-    flex: 0 0 30%;
-    opacity: 1;
-    transform: scale(1);
-}
 
 /* Side images */
 .carousel-slide.side {
@@ -141,45 +144,58 @@ body {
     transform: scale(0.8);
 }
 
-/* Buttons */
-.button-group a {
-    margin: 0 1rem;
-    display: inline-block;
+.button-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
 }
 
-.btn-custom {
+.btn-primary-home {
     background-color: var(--accent-color);
     color: white;
-    padding: 0.8rem 2.2rem;
+    padding: 1rem 2.5rem;
     border: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    border-radius: 35px;
+    font-size: 1.25rem;
+    font-weight: 600;
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
-.btn-custom:hover {
-    background-color: var(--base-color);
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(139, 168, 136, 0.3);
+.btn-primary-home:hover {
+    background-color: #e76a59;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(248, 121, 101, 0.25);
 }
 
-.btn-outline {
+.btn-secondary-home {
     border: 2px solid var(--accent-color);
-    background: transparent;
     color: var(--accent-color);
-    padding: 0.8rem 2.2rem;
+    background: transparent;
+    padding: 0.7rem 2rem;
     border-radius: 30px;
     font-size: 1.1rem;
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
-.btn-outline:hover {
+.btn-secondary-home:hover {
     background-color: var(--accent-color);
     color: white;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(248, 121, 101, 0.3);
+    transform: translateY(-2px);
 }
+.carousel-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* Lock height to prevent layout jump */
+    margin-top: 2rem;
+    position: relative;
+}
+
+
 </style>
 {% endblock %}

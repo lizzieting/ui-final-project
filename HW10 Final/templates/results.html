@@ -1,22 +1,122 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Quiz Results</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5 text-center">
-        <h1 class="mb-4">Quiz Results</h1>
-        <div class="card mx-auto" style="max-width: 400px;">
-            <div class="card-body">
-                <h2 class="card-title mb-4">Your Score</h2>
-                <div class="display-1 mb-4 {% if score >= 70 %}text-success{% else %}text-warning{% endif %}">
-                    {{ "%.1f"|format(score) }}%
-                </div>
-                <p class="lead">You answered {{ correct }} out of {{ total }} questions correctly.</p>
-                <a href="{{ url_for('quiz', question_id=1) }}" class="btn btn-primary mt-3">Try Again</a>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Quiz Results - Easy Yoga at Home{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <h1 class="main-title">Quiz Results</h1>
+    <p class="subtitle">See how you did!</p>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="result-card text-center p-4 mt-4">
+        <h2 class="mb-4">Your Score</h2>
+        <div class="score-display mb-4 {% if score >= 70 %}score-good{% else %}score-bad{% endif %}">
+            {{ "%.1f"|format(score) }}%
         </div>
+        <p class="lead">You answered {{ correct }} out of {{ total }} questions correctly.</p>
+        <a href="{{ url_for('quiz', question_id=1) }}" class="btn-custom mt-4">Try Again</a>
     </div>
-</body>
-</html> 
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+:root {
+    --base-color: #8BA888;
+    --accent-color: #f87965;
+    --background-color: #fffcf5;
+    --light-grey: #F5F5F5;
+    --dark-grey: #2C3E50;
+    --medium-grey: #BDC3C7;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--dark-grey);
+}
+
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--medium-grey);
+    margin-bottom: 2rem;
+}
+.result-card {
+    background-color: white;
+    border: 2px solid var(--accent-color);
+    border-radius: 15px;
+    max-width: 420px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    padding: 3rem 2rem;
+}
+
+.result-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.score-display {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.score-good {
+    color: var(--base-color);
+}
+
+.score-bad {
+    color: var(--accent-color);
+}
+
+.result-card p.lead {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: var(--dark-grey);
+    line-height: 1.6;
+}
+
+.btn-custom {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-custom:hover,
+.btn-custom:active {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 12px rgba(248, 121, 101, 0.25);
+}
+
+/* Navbar quiz tab active */
+nav .nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+}
+
+</style>
+{% endblock %}
