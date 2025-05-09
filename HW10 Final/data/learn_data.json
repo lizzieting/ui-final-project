@@ -24,7 +24,7 @@
           "name": "Bound Angle Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/gmgcbkyssvaetasg6ux3.gif?w=600", 
           "instructions": "1. Sit with feet together and knees out to the sides.\n2. Hold your feet or ankles with your hands.\n3. Gently press knees down and breathe.", 
-          "duration": "2 min",
+          "duration": "1 min",
           "audio": "bound-angle-pose.mp3"
         }
       ]
@@ -82,7 +82,7 @@
           "name": "Chair Pose",
           "image": "https://www.sheknows.com/wp-content/uploads/2018/08/mmdauls4w7zlxwyauj39.gif?w=600",
           "instructions": "1. Stand with feet together and bend knees.\n2. Reach arms overhead, keeping back straight.\n3. Shift weight into heels and hold.", 
-          "duration": "2 min",
+          "duration": "1 min",
           "audio": "chair-pose.mp3"
         }
       ]

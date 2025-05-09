@@ -21,7 +21,7 @@
 
     {% if pose.audio %}
 <div class="text-center mt-3">
-  <button class="btn btn-secondary" onclick="toggleAudio()"> ▶️ Audio</button>
+  <button class="btn btn-secondary" id="audio-btn">▶️ Start</button>
   <audio id="audio-guide" src="{{ url_for('static', filename='audio/' ~ pose.audio) }}"></audio>
 </div>
 {% endif %}
@@ -116,29 +116,47 @@
     </style>
 
 <script>
-    //audio button
-    function toggleAudio() {
-      const audio = document.getElementById("audio-guide");
-      if (!audio) return;
-  
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-        audio.currentTime = 0;
+  document.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("audio-guide");
+    const button = document.getElementById("audio-btn");
+    const fill = document.getElementById("progress-fill");
+
+    let progressInterval;
+
+    function updateProgress() {
+      if (audio && fill) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        fill.style.width = percent + "%";
       }
     }
-  
-    // animation
-    document.addEventListener("DOMContentLoaded", function () {
-      const fill = document.getElementById("progress-fill");
-      if (fill) {
-        setTimeout(() => {
-          fill.style.width = "100%";
-        }, 100); 
+
+    function startProgressTracking() {
+      clearInterval(progressInterval);
+      progressInterval = setInterval(() => {
+        updateProgress();
+        if (audio.ended) {
+          button.textContent = "▶️ Start"; // Reset button text when done
+          clearInterval(progressInterval);
+        }
+      }, 100);
+    }
+
+    button.addEventListener("click", () => {
+      if (!audio) return;
+
+      if (audio.paused) {
+        audio.play();
+        button.textContent = "⏸ Pause";
+        startProgressTracking();
+      } else {
+        audio.pause();
+        button.textContent = "▶️ Resume";
+        clearInterval(progressInterval);
       }
     });
-  </script>  
+  });
+</script>
+
 
 
 {% endblock %}
