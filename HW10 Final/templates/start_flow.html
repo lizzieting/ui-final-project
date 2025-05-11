@@ -14,9 +14,13 @@
 
         <!-- Pose Instructions -->
         <div class="col-md-6">
-            <h4 class=" pose-name mb-3">{{ pose.name }}</h4>
-            <p class="lead">{{ pose.instructions | replace('\n', '<br>') | safe }}</p>
-          </div>
+            <h4 class="pose-name mb-3">{{ pose.name }}</h4>
+            <ol class="pose-instructions">
+                {% for instruction in pose.instructions.split('\n') %}
+                    <li>{{ instruction.split('.', 1)[1] if '.' in instruction else instruction }}</li>
+                {% endfor %}
+            </ol>
+        </div>
     </div>
 
     {% if pose.audio %}
@@ -119,6 +123,23 @@
         text-align: center;
     }
 
+    .pose-instructions {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        padding-left: 1.5rem;
+        margin: 0;
+        color: var(--dark-grey);
+    }
+    
+    .pose-instructions li {
+        margin-bottom: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    
+    .pose-instructions li::marker {
+        color: var(--dark-grey);
+        font-weight: normal;
+    }
 
     </style>
 
